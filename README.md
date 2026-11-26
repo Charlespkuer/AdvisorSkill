@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md)
 
-Three rounds of AI edits, and your advisor is circling the same sentence again. The prose is smoother. Somehow, it sounds even more like AI.
+Your advisor feels that no matter how much you revise your paper, it still has a lingering AI flavor?
 
 **AdvisorSkill turns your advisor’s margin comments into a writing guide your agent can reuse.** The agent drafts rules from the feedback and the passages it refers to. You decide which rules to keep. On the next draft, the agent can use the guide and explain which rule backs each suggestion.
 
