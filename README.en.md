@@ -2,11 +2,15 @@
 
 [简体中文](README.md)
 
-Your advisor feels that no matter how much you revise your paper, it still has a lingering AI flavor?
+Does your paper still sound like AI after all those rounds of edits with your agent?
 
-**AdvisorSkill turns your advisor’s margin comments into a writing guide your agent can reuse.** The agent drafts rules from the feedback and the passages it refers to. You decide which rules to keep. On the next draft, the agent can use the guide and explain which rule backs each suggestion.
+**AdvisorSkill turns your advisor’s comments into a writing guide your agent can use when revising a paper.** The agent drafts rules from the feedback and the passages it refers to. You decide which rules to keep. On the next draft, the agent can use the guide and explain which rule backs each suggestion.
 
-Does your advisor keep asking you to explain the physical question before the methods? Save that as a rule and give your agent something concrete to check in the next abstract. After you edit the paper yourself, the agent can also flag earlier advice you may have missed.
+Does your advisor keep asking you to explain the physical question before the methods? Save that as a rule and give your agent something concrete to check in the next abstract.
+
+The Skill can remember feedback on specific passages, down to individual word choices and suggested phrase replacements.
+
+After you edit the paper yourself, the agent can also flag earlier advice you may have missed.
 
 Raw comments and manuscript excerpts stay local by default. See what a guide looks like in the [public registry](registry/profiles/).
 
@@ -47,6 +51,20 @@ advisorskill build --workspace .advisorskill/phy/sxz --output dist/phy
 Use `--reject` to record a rejection and preserve the current rules. Re-run `prepare` whenever new evidence or approvals change the material an agent needs to review.
 
 Keep source files, proposals, task packets, and outputs in a private location. Prefer a workspace outside a Git repository or under the ignored `.advisorskill/` directory. Treat every built Skill as private until its authored rules have been reviewed for disclosure. The build uses reviewed rule text and leaves raw evidence in the workspace.
+
+## Tips for getting more out of AdvisorSkill
+
+Keep using the same profile over time. Different agents can collect feedback across rounds, helping the guide reflect your advisor’s tastes more closely.
+
+Students with the same advisor can also share a guide and improve their writing together. (That’s the hope, anyway.)
+
+## Share a guide with your labmates
+
+> **When your advisor makes a suggestion once, the whole group can use it next time.**
+
+Students with the same advisor can use a private team repository. Contribute authorized feedback and excerpts by manuscript and round. A maintainer reviews the rules, then labmates sync and use the guide in their own Codex or DSH manuscript projects. Specific word and phrase choices can still be traced to their feedback and context.
+
+Ask your agent to “Share this round of feedback with the lab. Show me which records you selected first.” When revising, try “Sync the team’s advisor guide and use it to check my abstract.” Personal workspaces stay local. Rules authorized for public release follow the public submission workflow. [Private team collaboration](docs/team.md)
 
 ## Share a public guide
 

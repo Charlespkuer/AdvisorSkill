@@ -149,9 +149,15 @@ class Profile(Record):
     authorization: Text | None = None
 
 
+class TeamView(Record):
+    directory: Text
+    feedback_papers: dict[FeedbackID, ProfileID]
+
+
 class WorkspaceState(Record):
     profile: Profile
     feedback: tuple[Feedback, ...] = ()
     rules: tuple[Rule, ...] = ()
     history: tuple[Rule, ...] = ()
     decisions: tuple[Proposal, ...] = ()
+    team: TeamView | None = None

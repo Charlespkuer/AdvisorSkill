@@ -6,3 +6,4 @@
 - Use `deprecate` when the reviewer agrees that a rule should stop applying.
 - For conflicting feedback, compare scope, venue, evidence quality, and chronology. Propose a scoped revision if justified. Otherwise use `flag_conflict`, link the evidence, and explain what the reviewer should resolve. Approving the flag suspends the rule until the reviewer approves a resolution.
 - Use `no_change` when the evidence calls for no rule update. Link the affected rule or feedback. Re-prepare and reassess if the baseline has moved.
+- Consult the accumulated lexical observations when revisiting word choice. Use separate cases to explain when to prefer one expression, define a term, or preserve a qualifier. Keep a single local edit available as an example. If it belongs to an existing rule, consider attaching the evidence or clarifying that rule's conditions before proposing another rule.

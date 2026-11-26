@@ -10,6 +10,12 @@
 
 For example, the synthetic comment “Define the cutoff before using it in the caption” can store the original caption with its undefined cutoff in `context_before`, the actual updated caption in `context_after`, and `Figure 2 caption` in `section`.
 
+## Capture word and phrase choices
+
+- Look for individual substitutions, deletions, definitions, preferred names, and objections to particular uses. A one-word edit can matter. Capture the exact minimal expressions and the usage that the comment addresses, such as a noun in an abstract or a qualifier in a results claim.
+- Compare only clearly matched excerpts. Use the actual revised wording when the author supplied a matching revision. If the advisor supplied a replacement explicitly, record it as a recommendation. If the feedback just flags a term, record the term and what is unresolved. Record an inferred target or alternative as uncertain.
+- Keep examples that fit an existing rule or are too local for a new one. Identify the grammatical role, section, scientific meaning, and any legitimate alternative use when they affect the choice. Preserve distinctions in claim scope, statistical meaning, and established terminology.
+
 ## Infer a writing preference
 
 - Read the comment alongside its available passage, revision, location, and author role. Mark missing context in your reasoning.

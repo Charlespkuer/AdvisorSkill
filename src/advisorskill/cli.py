@@ -17,6 +17,7 @@ from advisorskill.storage import (
     AdvisorError, atomic_write, is_redirect, json_text, load_state, parse_record, resolve_path, save_state,
     writer_lock,
 )
+from advisorskill.team import run_team
 from advisorskill.validate import validate_state
 
 
@@ -71,7 +72,37 @@ def argument_parser():
     accept.add_argument("--replace", action="store_true", help="Replace with a complete reviewed guide.")
     registry = subcommands.add_parser("validate-registry", help="Validate paths and metadata of public guides.")
     registry.add_argument("--registry", type=Path, default=Path("registry/profiles"))
+    add_team_parser(subcommands)
     return parser
+
+
+def add_team_parser(subcommands):
+    team = subcommands.add_parser("team", help="Contribute to and sync a private team checkout.")
+    actions = team.add_subparsers(dest="team_command", required=True)
+
+    def action(name, help_text):
+        subparser = actions.add_parser(name, help=help_text, description=help_text)
+        subparser.add_argument("--team", type=Path, required=True, help="Local private team checkout.")
+        return subparser
+
+    init = action("init", "Initialize the private team ledger.")
+    init.add_argument("--id", required=True, help="Team profile ID.")
+    init.add_argument("--display-name")
+    init.add_argument("--discipline")
+    contribute = action("contribute", "Preview or write a selected evidence batch to the local checkout.")
+    contribute.add_argument("--workspace", type=Path, required=True, help="Personal source workspace.")
+    contribute.add_argument("--paper", required=True, help="Shared manuscript slug.")
+    contribute.add_argument("--round", required=True, help="Unique contribution slug for this manuscript.")
+    contribute.add_argument("--feedback", required=True, action="append", help="Evidence ID. Repeat to select more.")
+    contribute.add_argument("--approve", metavar="SHA256", help="Approved digest of the batch and team checkout.")
+    sync = action("sync", "Rebuild a separate local workspace from the team's evidence and decisions.")
+    sync.add_argument("--workspace", type=Path, required=True, help="Dedicated local team workspace.")
+    record = action("record", "Record a maintainer's review decision in the team ledger.")
+    record.add_argument("--proposal", type=Path, required=True)
+    decisions = record.add_mutually_exclusive_group(required=True)
+    decisions.add_argument("--approve", action="store_true")
+    decisions.add_argument("--reject", action="store_true")
+    action("validate", "Validate the team evidence and replay its recorded decisions.")
 
 
 def initialize(args, directory):
@@ -116,6 +147,9 @@ def review(state, proposal):
 
 
 def run(args):
+    if args.command == "team":
+        run_team(args)
+        return
     if args.command == "validate-registry":
         validate_registry(resolve_path(args.registry))
         return
@@ -138,6 +172,8 @@ def run(args):
     with writer_lock(directory):
         state = load_state(directory)
         validate_state(state)
+        if state.team is not None and args.command in {"ingest", "apply"}:
+            raise AdvisorError("Team workspaces are derived. Use team contribute or team record, then sync.")
         if args.command == "ingest":
             updated, added, duplicates = ingest_file(state, args.input)
             if added:

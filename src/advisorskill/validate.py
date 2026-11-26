@@ -15,6 +15,9 @@ def validate_state(state: WorkspaceState):
         check_correction(record, seen, superseded)
         seen[record.id] = record
 
+    if state.team is not None and state.team.feedback_papers.keys() != seen.keys():
+        raise AdvisorError("Team paper provenance must cover all feedback.")
+
     replayed = WorkspaceState(
         profile=state.profile.model_copy(update={"revision": 0}),
         feedback=state.feedback,

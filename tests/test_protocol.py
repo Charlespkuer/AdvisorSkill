@@ -29,5 +29,5 @@ def test_builder_skill_metadata_and_references():
     assert yaml.safe_load(host_policy.read_text(encoding="utf-8"))["policy"]["allow_implicit_invocation"]
     assert metadata["description"] and len(content.splitlines()) < 500
     links = re.findall(r"\]\((references/[^)]+)\)", body)
-    assert len(links) == 4
+    assert len(links) == 5
     assert all((path.parent / target).is_file() for target in links)
