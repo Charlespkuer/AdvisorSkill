@@ -53,6 +53,8 @@ advisorskill build --workspace .advisorskill/phy/sxz --output dist/phy
 
 ## 分享公开指南
 
-可以请 Agent「把 `phy/sxz` 的 R-001 和 R-003 做成公开指南草稿，给我审核」。审核具体内容、许可和投稿仓库后，Agent 可以把那份 Markdown 原样提交到 GitHub Issue。维护者审核合并后，公开指南集中在 `registry/profiles/<学科>/<导师>/GUIDE.md`。每位导师的本地写作 Skill 可以直接构建到当前论文项目的 `.agents/skills`（Codex）或 `.dsh/skills`（DSH）。
+本Skill有意愿做成一个共创型项目。每位用户都可以上传自己“蒸馏”的导师指导意见，不断地叠加优秀的写作指南，让您的Agent在本Skill的加持下越来越适合论文的写作！
+
+例如，可以请 Agent「把 `phy/sxz` 的 R-001 和 R-003 做成公开指南草稿，给我审核」。审核具体内容、许可和投稿仓库后，Agent 可以把那份 Markdown 原样提交到 GitHub Issue。维护者审核合并后，公开指南集中在 `registry/profiles/<学科>/<导师>/GUIDE.md`。每位导师的本地写作 Skill 可以直接构建到当前论文项目的 `.agents/skills`（Codex）或 `.dsh/skills`（DSH）。
 
 [公开分享和维护命令](docs/sharing.md) · [输入格式与提案协议](docs/protocol.md) · [合成输入示例](tests/fixtures) · [贡献指南](CONTRIBUTING.md)
