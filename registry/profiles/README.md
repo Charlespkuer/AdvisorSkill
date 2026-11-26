@@ -1,7 +1,14 @@
-# Profile registry
+# Public writing guide registry
 
-Paths use two levels, `<discipline>/<advisor>`. For example, [`phy/sxz`](phy/sxz/) reserves a category. Its empty `.gitkeep` keeps the folder in Git.
+Browse guides by discipline and then by the advisor's public alias. Each accepted guide lives at `<discipline>/<advisor>/GUIDE.md`, for example `phy/sxz/GUIDE.md`. Directory names use lowercase discipline codes.
 
-Store local evidence in `.advisorskill/<discipline>/<advisor>/` or in an explicitly selected private directory outside the repository. A local profile is ready for import once `advisorskill init` creates its `state.json`. The [demo fixtures](../../tests/fixtures/) contain synthetic feedback.
+- [PHY](phy/) · Physics
+- [CHEM](chem/) · Chemistry
+- [BIO](bio/) · Biology and life sciences
+- [MATH](math/) · Mathematics
+- [CS](cs/) · Computer science
+- [ENG](eng/) · Engineering
+- [MED](med/) · Medicine and health sciences
+- [ECON](econ/) · Economics
 
-Each advisor has one accepted public document at `<discipline>/<advisor>/GUIDE.md`. Maintainers merge reviewed contributions into this document. Public guides require authorization, a declared license, and manual review. See [sharing and curation](../../docs/sharing.md).
+Submit a reviewed public guide through [GitHub Issues](https://github.com/Charlespkuer/AdvisorSkill/issues). Maintainers incorporate accepted contributions into the existing guide for the selected advisor. Use the most relevant discipline for interdisciplinary work. If a discipline is missing, suggest its abbreviation in the same Issue. [Sharing and curation](../../docs/sharing.md)
