@@ -127,6 +127,19 @@
       "default": null,
       "title": "Source Ref"
     },
+    "supersedes": {
+      "anyOf": [
+        {
+          "pattern": "^fb-[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Supersedes"
+    },
     "thread_ref": {
       "anyOf": [
         {

@@ -252,6 +252,32 @@ def test_interrupted_build_restores_previous_skill(workspace, tmp_path, monkeypa
     assert skill.read_bytes() != previous
 
 
+def test_context_correction_keeps_audit_and_marks_previous_record(workspace, tmp_path):
+    start_with_rules(workspace)
+    state = load_state(workspace)
+    original = state.feedback[0]
+    data = original.model_dump(mode="json", exclude={"id"})
+    source = tmp_path / "correction.jsonl"
+    input_file(source, {**data, "supersedes": original.id, "context_before": "Corrected local excerpt."})
+    assert invoke(workspace, "ingest", "--input", source) == 0
+    assert invoke(workspace, "ingest", "--input", source) == 0
+
+    corrected = load_state(workspace)
+    successor = corrected.feedback[-1]
+    assert corrected.feedback[0] == original
+    assert corrected.rules == state.rules and corrected.decisions == state.decisions
+    assert successor.supersedes == original.id
+    assert successor.context_before == "Corrected local excerpt."
+    assert invoke(workspace, "prepare") == 0
+    packet = json.loads((workspace / "prepare.json").read_text(encoding="utf-8"))
+    assert packet["superseded_feedback"] == {original.id: successor.id}
+
+    input_file(source, {**data, "supersedes": successor.id, "comment": "A different comment."})
+    assert invoke(workspace, "ingest", "--input", source) == 1
+    assert load_state(workspace) == corrected
+    assert invoke(workspace, "validate") == 0
+
+
 def test_validate_detects_rules_changed_outside_approval_log(workspace):
     start_with_rules(workspace)
     file = workspace / "state.json"

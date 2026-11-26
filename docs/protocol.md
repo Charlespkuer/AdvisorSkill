@@ -10,6 +10,8 @@ For Markdown, start each comment with the exact heading `## Feedback`. Optional 
 
 Use a stable source record ID in `source_ref` and a new `revision` when editing feedback from the same source. When either value is absent, identity incorporates normalized content. Identity normalizes Unicode to NFC, standardizes newlines, and trims outer whitespace. The workspace retains the original recorded content. Importing identical feedback again is a no-op. A conflicting record for an existing source and revision fails the whole import.
 
+To correct the context of a stored feedback record, import a new row with its ID in `supersedes`, preserving its source, source reference, revision, and comment. The CLI keeps the older record and its audit references. The agent follows `prepare.json`'s `superseded_feedback` links to the latest context during analysis.
+
 ## Proposals and persistence
 
 `prepare` atomically refreshes the private `prepare.json` task packet. After new feedback or a decision, run it again before asking the host to draft another proposal.

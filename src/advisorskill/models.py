@@ -44,6 +44,7 @@ class FeedbackInput(Record):
     comment: Text
     context_before: str | None = None
     context_after: str | None = None
+    supersedes: FeedbackID | None = None
     scope: Text | None = None
     section: Text | None = None
     created_at: AwareDatetime | None = None

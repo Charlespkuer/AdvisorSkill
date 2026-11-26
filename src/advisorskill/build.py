@@ -20,9 +20,9 @@ def markdown_text(text: str):
     )
 
 
-def render_rule(rule: Rule):
+def render_rule(rule: Rule, *, heading_level: int = 2):
     lines = [
-        f"## {rule.id}",
+        f"{'#' * heading_level} {rule.id}",
         "",
         markdown_text(rule.statement),
         "",

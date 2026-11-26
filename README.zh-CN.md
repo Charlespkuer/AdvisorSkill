@@ -27,7 +27,7 @@ python -m venv .venv
 在已激活虚拟环境的终端中运行以下命令，将输入文件路径换成自己的私有文件。
 
 ```powershell
-advisorskill init --id sxz --discipline phy --workspace .advisorskill/phy/sxz
+advisorskill init --id phy-sxz --discipline phy --workspace .advisorskill/phy/sxz
 advisorskill ingest --workspace .advisorskill/phy/sxz --input PATH_TO_PRIVATE_COMMENTS.jsonl
 advisorskill prepare --workspace .advisorskill/phy/sxz
 ```
@@ -41,8 +41,12 @@ advisorskill validate --workspace .advisorskill/phy/sxz
 advisorskill build --workspace .advisorskill/phy/sxz --output dist/phy
 ```
 
-拒绝时使用 `--reject`，决定会留在工作区供追溯。每轮导入后重新运行 `prepare`。构建结果位于 `dist/phy/advisor-sxz/`，其中按主题列出当前可用规则。
+拒绝时使用 `--reject`，决定会留在工作区供追溯。每轮导入后重新运行 `prepare`。构建结果位于 `dist/phy/advisor-phy-sxz/`，其中按主题列出当前可用规则。
 
 原始评论、论文片段、提案和任务包均为私有数据。建议将工作区置于仓库外或已忽略的 `.advisorskill/`，并在分享前人工审查生成的规则。
 
-[输入格式与提案协议](docs/protocol.md) · [合成输入示例](tests/fixtures) · [贡献指南](CONTRIBUTING.md)
+## 分享公开指南
+
+可以请 Agent「把 `phy/sxz` 的 R-001 和 R-003 做成公开指南草稿，给我审核」。审核具体内容、许可和投稿仓库后，Agent 可以把那份 Markdown 原样提交到 GitHub Issue。维护者审核合并后，公开指南集中在 `registry/profiles/<学科>/<导师>/GUIDE.md`。每位导师的本地写作 Skill 可以直接构建到当前论文项目的 `.agents/skills`（Codex）或 `.dsh/skills`（DSH）。
+
+[公开分享和维护命令](docs/sharing.md) · [输入格式与提案协议](docs/protocol.md) · [合成输入示例](tests/fixtures) · [贡献指南](CONTRIBUTING.md)

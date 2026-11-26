@@ -1,5 +1,6 @@
 .advisorskill/
 private-workspace/
+.advisorskill.lock
 public-draft/
 dist/
 build/

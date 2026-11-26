@@ -28,7 +28,9 @@ def normalize(value: str | None):
 def content_id(record: FeedbackInput):
     source_ref = normalize(record.source_ref)
     revision = normalize(record.revision)
-    if source_ref is not None and revision is not None:
+    if record.supersedes is not None:
+        identity = ["context-correction", record.supersedes]
+    elif source_ref is not None and revision is not None:
         identity = ["source-revision", record.source, source_ref, revision]
     else:
         content = [normalize(getattr(record, field)) for field in CONTENT_FIELDS]
@@ -89,17 +91,32 @@ def equivalent(left: Feedback, right: Feedback):
     )
 
 
+def check_correction(record, previous_records, superseded):
+    target = record.supersedes
+    if target is None:
+        return
+    prior = previous_records.get(target)
+    if prior is None or target in superseded:
+        raise AdvisorError("A correction must reference a current feedback record in this workspace.")
+    provenance = ("source", "source_ref", "revision", "comment")
+    if any(getattr(record, key) != getattr(prior, key) for key in provenance):
+        raise AdvisorError("A context correction must preserve source identity and comment wording.")
+    superseded.add(target)
+
+
 def ingest_file(state: WorkspaceState, path: Path):
     parsers = {".jsonl": jsonl_records, ".md": markdown_records, ".markdown": markdown_records}
     parser = parsers.get(path.suffix.lower())
     if parser is None:
         raise AdvisorError("Input must use .jsonl, .md or .markdown.")
     existing = {record.id: record for record in state.feedback}
+    superseded = {record.supersedes for record in state.feedback if record.supersedes}
     added = duplicates = 0
     for item in parser(path.read_text(encoding="utf-8-sig")):
         record = Feedback(id=content_id(item), **item.model_dump())
         previous = existing.get(record.id)
         if previous is None:
+            check_correction(record, existing, superseded)
             existing[record.id] = record
             added += 1
         elif equivalent(previous, record):

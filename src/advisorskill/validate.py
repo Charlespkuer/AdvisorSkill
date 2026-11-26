@@ -1,17 +1,19 @@
 """Check immutable evidence IDs and replay the recorded approval history."""
 
-from advisorskill.ingest import content_id
+from advisorskill.ingest import check_correction, content_id
 from advisorskill.models import WorkspaceState
 from advisorskill.proposals import decide
 from advisorskill.storage import AdvisorError
 
 
 def validate_state(state: WorkspaceState):
-    seen = set()
+    seen = {}
+    superseded = set()
     for record in state.feedback:
         if record.id in seen or content_id(record) != record.id:
             raise AdvisorError("Workspace contains a duplicate or invalid feedback ID.")
-        seen.add(record.id)
+        check_correction(record, seen, superseded)
+        seen[record.id] = record
 
     replayed = WorkspaceState(
         profile=state.profile.model_copy(update={"revision": 0}),
