@@ -1,0 +1,8 @@
+proposal_id: round-2-deprecation
+base_revision: 2
+rationale: "The synthetic reviewer will consider whether the introduction rule has served its purpose."
+risks:
+  - "Deprecation would remove the supported rule from the manuscript workflow."
+operations:
+  - type: deprecate
+    rule_id: R-001

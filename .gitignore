@@ -1,0 +1,10 @@
+.advisorskill/
+private-workspace/
+public-draft/
+dist/
+build/
+.venv/
+.pytest_cache/
+__pycache__/
+*.egg-info/
+*.py[cod]

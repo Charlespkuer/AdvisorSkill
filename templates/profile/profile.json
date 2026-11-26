@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.1",
+  "profile_id": "my-advisor",
+  "display_name": "Advisor alias",
+  "discipline": null,
+  "language": null,
+  "version": "0.1.0",
+  "revision": 0,
+  "license": null,
+  "visibility": "private",
+  "rules_path": "state.json#/rules",
+  "authorization": null
+}

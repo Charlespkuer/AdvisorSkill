@@ -1,0 +1,13 @@
+proposal_id: round-2-update
+base_revision: 1
+rationale: "A separate synthetic thread supports the introduction rule. The methods comments give opposing orderings."
+conflicts:
+  - "Resolve whether the methods ordering depends on the intended readers or on a change between drafts."
+operations:
+  - type: attach_evidence
+    rule_id: R-001
+    evidence_ids: [fb-6e4a0f156951622f87bec86bd9fb0e03b9376183184f7ad56b848dbf4f21199c]
+  - type: flag_conflict
+    rule_id: R-002
+    evidence_ids: [fb-db8758bdb025c8bc1291ebbe3c5f9d354cec7e524fc8d30a8cd960afcf983cf4]
+    reason: "Both comments address this methods section and the available context does not settle the order."

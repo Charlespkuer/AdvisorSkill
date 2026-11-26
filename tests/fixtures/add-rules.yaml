@@ -1,0 +1,25 @@
+proposal_id: round-1-add
+base_revision: 0
+rationale: "The synthetic comments provide two observations about the order of ideas in this draft."
+risks:
+  - "Both observations are provisional and local to this manuscript."
+operations:
+  - type: add
+    rule:
+      id: R-001
+      category: narrative
+      statement: "Explain the physical motivation before introducing a technical bound."
+      scope:
+        level: manuscript
+        sections: [introduction]
+        conditions: ["When introducing the main bound in this draft."]
+      evidence_ids: [fb-6acc694da15d8d1e3705a4ff5fb41135014d7a6d0c3e1700cc8e628e7cb10b6c]
+  - type: add
+    rule:
+      id: R-002
+      category: structure
+      statement: "Present the dataset details before describing the measurement workflow."
+      scope:
+        level: manuscript
+        sections: [methods]
+      evidence_ids: [fb-2778fefd1d207c2bd6a5c830290ff73a715139cae6c2aaab811c5effed6b14e5]

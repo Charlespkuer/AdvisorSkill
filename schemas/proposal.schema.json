@@ -1,0 +1,388 @@
+{
+  "$defs": {
+    "Add": {
+      "additionalProperties": false,
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/RuleContent"
+        },
+        "type": {
+          "const": "add",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "rule"
+      ],
+      "title": "Add",
+      "type": "object"
+    },
+    "AttachEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "pattern": "^fb-[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "rule_id": {
+          "maxLength": 80,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "attach_evidence",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "rule_id",
+        "evidence_ids"
+      ],
+      "title": "AttachEvidence",
+      "type": "object"
+    },
+    "Category": {
+      "enum": [
+        "narrative",
+        "argumentation",
+        "scientific_claims",
+        "structure",
+        "language",
+        "figures",
+        "notation",
+        "citations",
+        "journal_format",
+        "research_method"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "Deprecate": {
+      "additionalProperties": false,
+      "properties": {
+        "rule_id": {
+          "maxLength": 80,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "deprecate",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "rule_id"
+      ],
+      "title": "Deprecate",
+      "type": "object"
+    },
+    "FlagConflict": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "pattern": "^fb-[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "reason": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Reason",
+          "type": "string"
+        },
+        "rule_id": {
+          "maxLength": 80,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "flag_conflict",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "rule_id",
+        "evidence_ids",
+        "reason"
+      ],
+      "title": "FlagConflict",
+      "type": "object"
+    },
+    "NoChange": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^fb-[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Id"
+        },
+        "type": {
+          "const": "no_change",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "NoChange",
+      "type": "object"
+    },
+    "Revise": {
+      "additionalProperties": false,
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/RuleContent"
+        },
+        "type": {
+          "const": "revise",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "rule"
+      ],
+      "title": "Revise",
+      "type": "object"
+    },
+    "RuleContent": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/Category"
+        },
+        "confidence": {
+          "default": "tentative",
+          "enum": [
+            "tentative",
+            "supported",
+            "strong"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^fb-[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "id": {
+          "maxLength": 80,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "statement": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "statement",
+        "scope",
+        "evidence_ids"
+      ],
+      "title": "RuleContent",
+      "type": "object"
+    },
+    "Scope": {
+      "additionalProperties": false,
+      "properties": {
+        "conditions": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Conditions",
+          "type": "array"
+        },
+        "exceptions": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Exceptions",
+          "type": "array"
+        },
+        "level": {
+          "enum": [
+            "local_issue",
+            "manuscript",
+            "venue",
+            "field",
+            "advisor_preference"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "sections": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Sections",
+          "type": "array"
+        }
+      },
+      "required": [
+        "level"
+      ],
+      "title": "Scope",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "base_revision": {
+      "minimum": 0,
+      "title": "Base Revision",
+      "type": "integer"
+    },
+    "conflicts": {
+      "default": [],
+      "items": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "title": "Conflicts",
+      "type": "array"
+    },
+    "operations": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "add": "#/$defs/Add",
+            "attach_evidence": "#/$defs/AttachEvidence",
+            "deprecate": "#/$defs/Deprecate",
+            "flag_conflict": "#/$defs/FlagConflict",
+            "no_change": "#/$defs/NoChange",
+            "revise": "#/$defs/Revise"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/Add"
+          },
+          {
+            "$ref": "#/$defs/Revise"
+          },
+          {
+            "$ref": "#/$defs/AttachEvidence"
+          },
+          {
+            "$ref": "#/$defs/Deprecate"
+          },
+          {
+            "$ref": "#/$defs/FlagConflict"
+          },
+          {
+            "$ref": "#/$defs/NoChange"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Operations",
+      "type": "array"
+    },
+    "proposal_id": {
+      "maxLength": 80,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+      "title": "Proposal Id",
+      "type": "string"
+    },
+    "rationale": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Rationale",
+      "type": "string"
+    },
+    "risks": {
+      "default": [],
+      "items": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "status": {
+      "default": "pending",
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "proposal_id",
+    "base_revision",
+    "operations",
+    "rationale"
+  ],
+  "title": "Proposal",
+  "type": "object"
+}

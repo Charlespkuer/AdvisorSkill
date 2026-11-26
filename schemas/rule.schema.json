@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "Category": {
+      "enum": [
+        "narrative",
+        "argumentation",
+        "scientific_claims",
+        "structure",
+        "language",
+        "figures",
+        "notation",
+        "citations",
+        "journal_format",
+        "research_method"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "Scope": {
+      "additionalProperties": false,
+      "properties": {
+        "conditions": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Conditions",
+          "type": "array"
+        },
+        "exceptions": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Exceptions",
+          "type": "array"
+        },
+        "level": {
+          "enum": [
+            "local_issue",
+            "manuscript",
+            "venue",
+            "field",
+            "advisor_preference"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "sections": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Sections",
+          "type": "array"
+        }
+      },
+      "required": [
+        "level"
+      ],
+      "title": "Scope",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "category": {
+      "$ref": "#/$defs/Category"
+    },
+    "confidence": {
+      "default": "tentative",
+      "enum": [
+        "tentative",
+        "supported",
+        "strong"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "pattern": "^fb-[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "id": {
+      "maxLength": 80,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "scope": {
+      "$ref": "#/$defs/Scope"
+    },
+    "statement": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Statement",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "proposed",
+        "active",
+        "deprecated",
+        "conflicted"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "category",
+    "statement",
+    "scope",
+    "evidence_ids",
+    "status",
+    "revision"
+  ],
+  "title": "Rule",
+  "type": "object"
+}
