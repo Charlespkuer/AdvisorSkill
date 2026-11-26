@@ -2,7 +2,13 @@
 
 [简体中文](README.zh-CN.md)
 
-AdvisorSkill turns feedback on academic manuscripts into reviewed, evidence-linked writing preferences. The host agent drafts proposals. The Python CLI records decisions, checks provenance, and builds a portable Agent Skill from approved rules.
+Three rounds of AI edits, and your advisor is circling the same sentence again. The prose is smoother. Somehow, it sounds even more like AI.
+
+**AdvisorSkill turns your advisor’s margin comments into a writing guide your agent can reuse.** The agent drafts rules from the feedback and the passages it refers to. You decide which rules to keep. On the next draft, the agent can use the guide and explain which rule backs each suggestion.
+
+Does your advisor keep asking you to explain the physical question before the methods? Save that as a rule and give your agent something concrete to check in the next abstract.
+
+Raw comments and manuscript excerpts stay local by default. See what a guide looks like in the [public registry](registry/profiles/).
 
 ## Run locally
 
